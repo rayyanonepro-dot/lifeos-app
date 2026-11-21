@@ -15,7 +15,15 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
+
+      - name: Prepare www directory
+        run: |
+          mkdir -p www
+          if [ -d "assets" ]; then cp -r assets www/; fi
+          if [ -f "index.html" ]; then cp index.html www/; fi
+          if [ -f "favicon.svg" ]; then cp favicon.svg www/; fi
+          if [ -f "opengraph.jpg" ]; then cp opengraph.jpg www/; fi
 
       - name: Install dependencies
         run: npm install
